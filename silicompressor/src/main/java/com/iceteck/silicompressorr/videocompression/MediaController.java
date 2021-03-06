@@ -778,7 +778,7 @@ public class MediaController {
         String extension = ".mp4";
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            String fileName = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(new Date()) + ".mp4";
+            String fileName = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date()) + ".mp4";
 /*            ContentValues values = new ContentValues();
             values.put(MediaStore.Video.Media.DISPLAY_NAME, fileName);
             values.put(MediaStore.Video.Media.TITLE, fileName);
@@ -809,8 +809,7 @@ public class MediaController {
 */
 
 
-            File file = new File(mContext.getExternalFilesDir(
-                    Environment.DIRECTORY_MOVIES), fileName);
+            File file = new File(mContext.getExternalCacheDir(), fileName);
             try {
                 if (!file.exists()) file.createNewFile();
             } catch (IOException e) {
@@ -828,7 +827,7 @@ public class MediaController {
             if (!destDirectory.exists()) {
                 destDirectory.mkdirs();
             }
-            return (destDirectory.getAbsolutePath() + "/VIDEO_" + new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()) + extension);
+            return (destDirectory.getAbsolutePath() + "/VIDEO_" + new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date()) + extension);
 
         }
     }
